@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
 
     private Vector3 move = Vector3.zero;
+    private bool key = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,5 +31,20 @@ public class PlayerController : MonoBehaviour
         verticalAxe = Input.GetAxis("Vertical");
         if (verticalAxe > 0)
             transform.Translate(Vector3.forward * curSpeed * Time.fixedDeltaTime * verticalAxe);
+    }
+
+    public void getKey()
+    {
+        key = true;
+    }
+
+    public bool useKey()
+    {
+        if (key)
+        {
+            key = false;
+            return (true);
+        }
+        return (false);
     }
 }
