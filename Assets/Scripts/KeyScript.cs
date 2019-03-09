@@ -12,7 +12,14 @@ public class KeyScript : MonoBehaviour
             //Debug.Log("T: " + collision.collider.tag);
              //Debug.Log(other.GetComponent<PlayerController>());
              other.GetComponent<PlayerController>().getKey();
-             Destroy(transform.gameObject);
+             GetComponent<AudioSource>().Play();
+             Renderer[] renderers = GetComponentsInChildren<Renderer>();
+             foreach (var r in renderers)
+                 r.enabled = false;
+            Collider[] colliders = GetComponentsInChildren<Collider>();
+            foreach (var c in colliders)
+                c.enabled = false;
+             Destroy(transform.gameObject, 3f);
         }
     }
 }
