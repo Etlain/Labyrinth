@@ -206,3 +206,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  rot: 80
+  GoGameOver: {fileID: 0}

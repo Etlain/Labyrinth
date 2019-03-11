@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    private float speed = 10f;
+    private float       speed = 10f;
+    [SerializeField]
+    private float       rot = 80f;
+    [SerializeField]
+    private GameObject  GoGameOver = null;
+
     private float curSpeed;
-    private float rot = 80f;
-
-
     private Vector3 move = Vector3.zero;
     private bool key = false;
     // Start is called before the first frame update
@@ -33,6 +36,12 @@ public class PlayerController : MonoBehaviour
             transform.Translate(Vector3.forward * curSpeed * Time.fixedDeltaTime * verticalAxe);
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "enemy")
+            gameOver();
+    }
+
     public void getKey()
     {
         key = true;
@@ -46,5 +55,18 @@ public class PlayerController : MonoBehaviour
             return (true);
         }
         return (false);
+    }
+
+    public void gameOver()
+    {
+        GoGameOver.SetActive(true);
+        StartCoroutine(loadMenu());
+        //SceneManager.LoadScene("Menu");
+    }
+
+    IEnumerator loadMenu()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("Menu");
     }
 }

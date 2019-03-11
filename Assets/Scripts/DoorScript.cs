@@ -6,7 +6,11 @@ public class DoorScript : MonoBehaviour
 {
 
     [SerializeField]
-    AudioClip sndOpen, sndDenied;
+    AudioClip sndOpen = null;
+    [SerializeField]
+    AudioClip sndDenied = null;
+    [SerializeField]
+    GameObject endPoint = null;
 
     private AudioSource myAudioSource;
 
@@ -24,6 +28,8 @@ public class DoorScript : MonoBehaviour
             isKey = other.GetComponent<PlayerController>().useKey();
             if (isKey)
             {
+                if (endPoint)
+                    endPoint.SetActive(true);
                 GetComponent<Animator>().enabled = true;
                 myAudioSource.PlayOneShot(sndOpen);
             }
